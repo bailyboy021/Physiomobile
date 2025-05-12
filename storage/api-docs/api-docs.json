@@ -1,0 +1,353 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Physiomobile API",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "/api"
+        }
+    ],
+    "paths": {
+        "/api": {},
+        "/patients": {
+            "get": {
+                "tags": [
+                    "Patients"
+                ],
+                "summary": "Get list of patients",
+                "operationId": "90275bb01ca424c9f43eba1310bcfc31",
+                "parameters": [
+                    {
+                        "name": "accessKey",
+                        "in": "header",
+                        "description": "Access key for authentication",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": ""
+                        }
+                    },
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "description": "Request content type",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "application/json"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "List of patients",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "integer"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "medium_acquisition": {
+                                                "type": "string"
+                                            },
+                                            "created_at": {
+                                                "type": "string"
+                                            },
+                                            "updated_at": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Patients"
+                ],
+                "summary": "Create a new patient",
+                "operationId": "f339d0077ba97fd7c2dcf90987d9b0cb",
+                "parameters": [
+                    {
+                        "name": "accessKey",
+                        "in": "header",
+                        "description": "Access key for authentication",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": ""
+                        }
+                    },
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "description": "Content Type",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "application/json"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "id_type",
+                                    "id_no",
+                                    "gender",
+                                    "dob",
+                                    "address",
+                                    "medium_acquisition"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Nico Robin"
+                                    },
+                                    "id_type": {
+                                        "type": "string",
+                                        "example": "KTP"
+                                    },
+                                    "id_no": {
+                                        "type": "string",
+                                        "example": "1234567890"
+                                    },
+                                    "gender": {
+                                        "type": "string",
+                                        "enum": [
+                                            "male",
+                                            "female"
+                                        ]
+                                    },
+                                    "dob": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "2000-01-01"
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "example": "Ohara"
+                                    },
+                                    "medium_acquisition": {
+                                        "type": "string",
+                                        "example": "Online"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Patient created successfully"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        },
+        "/patients/{id}": {
+            "get": {
+                "tags": [
+                    "Patients"
+                ],
+                "summary": "Get a specific patient by ID",
+                "operationId": "4731766140224a50c904dbd45837e97f",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Patient ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "accessKey",
+                        "in": "header",
+                        "description": "Access key for authentication",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": ""
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Patient data"
+                    },
+                    "404": {
+                        "description": "Patient not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Patients"
+                ],
+                "summary": "Update an existing patient",
+                "operationId": "54fa3d415ed1a308b0cacfbc957869ac",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Patient ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "accessKey",
+                        "in": "header",
+                        "description": "Access key for authentication",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": ""
+                        }
+                    },
+                    {
+                        "name": "Content-Type",
+                        "in": "header",
+                        "description": "Content Type",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "application/json"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": false,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Nico Robin"
+                                    },
+                                    "id_type": {
+                                        "type": "string",
+                                        "example": "SIM"
+                                    },
+                                    "id_no": {
+                                        "type": "string",
+                                        "example": "9876543210"
+                                    },
+                                    "gender": {
+                                        "type": "string",
+                                        "enum": [
+                                            "male",
+                                            "female"
+                                        ]
+                                    },
+                                    "dob": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "1990-01-01"
+                                    },
+                                    "address": {
+                                        "type": "string",
+                                        "example": "Ohara"
+                                    },
+                                    "medium_acquisition": {
+                                        "type": "string",
+                                        "example": "Referral"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Patient updated successfully"
+                    },
+                    "404": {
+                        "description": "Patient not found"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Patients"
+                ],
+                "summary": "Delete a patient by ID",
+                "operationId": "358e215d5853928883fdd1098b321a4a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Patient ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "accessKey",
+                        "in": "header",
+                        "description": "Access key for authentication",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": ""
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Patient deleted successfully"
+                    },
+                    "404": {
+                        "description": "Patient not found"
+                    },
+                    "500": {
+                        "description": "Internal server error"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Patients",
+            "description": "Patients"
+        }
+    ]
+}
